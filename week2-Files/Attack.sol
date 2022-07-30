@@ -5,7 +5,7 @@ contract Attack {
     EtherStore public store;
 
     //balance of user
-    uint256 public balance;
+    uint256 public balance = 0;
 
     //update the user's balance
     function updateBalance() public {
