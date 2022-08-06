@@ -38,4 +38,66 @@ contract ("XYZCoin", async accounts => {
         assert(await xyzCoinInstance.transferFrom(owner, receiver, 250));
         assert.equal(await xyzCoinInstance.balanceOf(receiver), 250);
     });
+
+    it("insufficient balance account transfer reverse",
+    async() => {
+        let xyzCoinInstance = await XYZCoin.deployed();
+        let receiver = 3450;
+        await xyzCoinInstance.transfer(receiver, 500);
+
+        await truffleAssert.fails(
+            await xyzCoinInstance.transfer(receiver, 700),
+            truffleAssert.ErrorType.REVERT,
+            "insufficient balance"
+        );
+    });
+
+    it("Unauthorized transaction reverse",
+    async() => {
+        let xyzCoinInstance = await XYZCoin.deployed();
+        let receiver = 3450;
+        let owner = await xyzCoinInstance.owner();
+        await xyzCoinInstance.transfer(receiver, 500);
+
+        await truffleAssert.fails(
+            await xyzCoinInstance.transferFrom(reveiver, owner, 300),
+            truffleAssert.ErrorType.REVERT,
+            "Unauthorized transfer"
+        );
+    });
+
+    it("Transfer event fired",
+    async() => {
+        let xyzCoinInstance = await XYZCoin.deployed();
+        let receiver = 3450;
+        let owner = await xyzCoinInstance.owner();
+
+        await truffleAssert.eventEmitted(
+            await xyzCoinInstance.transfer(receiver, 0),
+            'Transfer'
+        );
+
+        await truffleAssert.eventEmitted(
+            await xyzCoinInstance.transfer(receiver, 100),
+            'Transfer'
+        );
+
+        await xyzCoinInstance.approve(owner, 500);
+
+        await truffleAssert.eventEmitted(
+            await xyzCoinInstance.transferFrom(owner, receiver, 250),
+            'Transfer'
+        );
+    });
+
+    it("Approval event fired",
+    async() => {
+        let xyzCoinInstance = await XYZCoin.deployed();
+        let spender = 3450;
+
+        await truffleAssert.eventEmitted(
+            await xyzCoinInstance.approve(spender, 500),
+            'Approval'
+        );
+    });
 })
