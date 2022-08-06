@@ -20,7 +20,7 @@ contract XYZCoin is EIP20 {
     address public owner;
 
 
-    function XYZCoin(
+    constructor (
         string memory _tokenName,
         string memory _tokenSymbol
     ) public {
