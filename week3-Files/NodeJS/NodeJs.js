@@ -3,7 +3,7 @@ async function countBlocksWithFirstCreate() {
     const web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/ac779e84f776449f87d0c5e060ca46eb'))
 
     //variable use to count number of block that contains contract-creation transaction
-    number = 0
+    let number = 0
 
     //use getBlock and getBlockNumber to get the earliest and latest block number
     const earliestBlockNum = await web3.eth.getBlock('earliest').number
