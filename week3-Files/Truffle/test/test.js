@@ -1,6 +1,7 @@
 const XYZCoin = artifacts.require("XYZCoin");
 
 contract ("XYZCoin", async accounts => {
+    //---------------------------------Assignment 4.(h)--------------------------------------------------
     it("Initial token balance equal to total token supply",
     async() => {
         let xyzCoinInstance = await XYZCoin.deployed();
@@ -39,6 +40,10 @@ contract ("XYZCoin", async accounts => {
         assert.equal(await xyzCoinInstance.balanceOf(receiver), 250);
     });
 
+
+
+
+    //---------------------------------Assignment 4.(i)--------------------------------------------------
     it("insufficient balance account transfer reverse",
     async() => {
         let xyzCoinInstance = await XYZCoin.deployed();
