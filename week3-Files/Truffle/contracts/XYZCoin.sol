@@ -14,12 +14,14 @@ contract XYZCoin is EIP20 {
     mapping (address => uint256) public balances;
     mapping (address => mapping (address => uint256)) public allowed;
 
+    //Getter functions are replaced with variables since they
+    //automatically create getter functions for themselves
     string public name;
     uint8 public decimals;
     string public symbol;
     address public owner;
 
-
+    //the XYZCoin constructor
     constructor (
         string memory _tokenName,
         string memory _tokenSymbol
