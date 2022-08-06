@@ -1,4 +1,4 @@
-const XYZCoin = artifacts.require("../contracts/XYZCoin.sol");
+const XYZCoin = artifacts.require("XYZCoin");
 
 module.exports = function (deployer) {
   deployer.deploy(XYZCoin);
