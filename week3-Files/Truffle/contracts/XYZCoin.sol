@@ -22,16 +22,12 @@ contract XYZCoin is EIP20 {
     address public owner;
 
     //the XYZCoin constructor
-    constructor (
-        string memory _tokenName,
-        string memory _tokenSymbol
-    ) public {
+    constructor () public {
         owner = msg.sender;
         balances[msg.sender] = 1000;
         totalSupply = 1000;
-        name = _tokenName;
+        name = "XYZCoin";
         decimals = 0;
-        symbol = _tokenSymbol;
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
